@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health & Fitness App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+            color: #333;
+        }
+        header {
+            background: #28a745;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 2em auto;
+            background: white;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #28a745;
+        }
+        input, button {
+            width: 100%;
+            padding: 0.8em;
+            margin: 0.5em 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .tip {
+            margin: 1em 0;
+            padding: 1em;
+            background: #e9f7ef;
+            border-left: 5px solid #28a745;
+        }
+        .result {
+            margin-top: 1em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Health & Fitness App</h1>
+</header>
+
+<div class="container">
+    <section id="tips">
+        <h2>Exercise Tips</h2>
+        <div class="tip" id="tip-container"></div>
+        <button onclick="generateTip()">Get a New Tip</button>
+    </section>
+    <hr>
+    <section id="bmi">
+        <h2>BMI Calculator</h2>
+        <input type="number" id="height" placeholder="Height in cm">
+        <input type="number" id="weight" placeholder="Weight in kg">
+        <button onclick="calculateBMI()">Calculate BMI</button>
+        <div class="result" id="bmi-result"></div>
+    </section>
+    <hr>
+    <section id="steps">
+        <h2>Step Counter</h2>
+        <input type="number" id="steps-today" placeholder="Steps taken today">
+        <button onclick="logSteps()">Log Steps</button>
+        <div class="result" id="steps-result"></div>
+    </section>
+</div>
+
+<script>
+    // Exercise Tips
+    const tips = [
+        "Take the stairs instead of the elevator.",
+        "Go for a walk during your lunch break.",
+        "Do 15 minutes of yoga in the morning.",
+        "Include strength training in your routine.",
+        "Stay hydrated and drink plenty of water.",
+        "Join a fitness class for motivation.",
+        "Get enough sleep to recover your muscles."
+    ];
+
+    function generateTip() {
+        const tipContainer = document.getElementById('tip-container');
+        const randomTip = tips[Math.floor(Math.random() * tips.length)];
+        tipContainer.textContent = randomTip;
+    }
+
+    // BMI Calculator
+    function calculateBMI() {
+        const height = parseFloat(document.getElementById('height').value);
+        const weight = parseFloat(document.getElementById('weight').value);
+        if (isNaN(height) || isNaN(weight)) {
+            alert("Please enter valid numbers for height and weight.");
+            return;
+        }
+        const bmi = weight / ((height / 100) ** 2);
+        const bmiResult = document.getElementById('bmi-result');
+        bmiResult.textContent = `Your BMI is ${bmi.toFixed(2)}`;
+    }
+
+    // Step Counter
+    function logSteps() {
+        const stepsToday = parseInt(document.getElementById('steps-today').value);
+        if (isNaN(stepsToday)) {
+            alert("Please enter a valid number of steps.");
+            return;
+        }
+        const stepsResult = document.getElementById('steps-result');
+        stepsResult.textContent = `You have logged ${stepsToday} steps today! Keep it up!`;
+    }
+</script>
+
+</body>
+</html>
